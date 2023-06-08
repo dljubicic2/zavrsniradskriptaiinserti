@@ -74,3 +74,28 @@ values (3,'da li je vozilo jos dostupno','2023-05-30 15:30',2),
 (5,'Zanima me kilometraža vozila i ispravnost vozila','2023-05-20 8:00',3),
 (2,'Postovani da li je klima ispravna','2023-02-25 14:23',1),
 (3,'Da li je to zadnja cijena','2023-03-01 14:25',4);
+
+
+-- Select kroz više tablica:
+
+-- Izlistajte sve marke i modele vozila kojima naslov oglasa po?inje sa A
+select a.marka, a.model
+from vozilo a inner join osoba b on a.osoba=b.id
+inner join oglas c on b.id=c.osoba
+where c.naslov like 'A%';
+
+-- Izlistajte sva vozila koji na oglasu nisu skuplji od 50 000 eura
+select c.vrsta, c.marka, c.model, c.pogon, c.godište, c.kilometraža, c.osoba
+from oglas a inner join osoba b on a.osoba=b.id
+inner join vozilo c on b.id=c.osoba
+where a.cijena<50000;
+
+-- Select kroz jednu tablicu
+
+-- Izlistajte sva vozila koja imaju pogon na dizel
+select * from vozilo
+where pogon='dizel';
+
+-- Izlistajte sve upite koji su napisani izme?u Sije?nja i Travnja
+select * from upit
+where vrijeme_upita between '2023-01-01' and '2023-04-30';
